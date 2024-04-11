@@ -7,23 +7,23 @@ const StyledTodo = styled.li`
 `
 
 export default function Todo({
-  todos,
+  todos, toggleTodo, toggleList, showList
 }) {
   return (
     <div id="todos">
       <h3>Todos</h3>
-      <ul>
+      {showList && <ul>
         {
           todos
             .map(todo => (
-              <StyledTodo $complete={todo.complete} key={todo.id}>
+              <StyledTodo $complete={todo.complete} key={todo.id} onClick={() => toggleTodo(todo.id)}>
                 <span>{todo.label}{todo.complete && ' ✔️'}</span>
               </StyledTodo>
             ))
         }
-      </ul>
-      <button>
-        Hide completed todos
+      </ul>}
+      <button onClick={toggleList}>
+        {showList? 'Hide' : 'Show'} completed todos
       </button>
     </div>
   )
